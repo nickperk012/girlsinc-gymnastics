@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Girls Inc. Gymnastics – Private Lessons</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C0392B;
+    --red-dark: #96281B;
+    --red-deep: #6E1A10;
+    --red-light: #FDECEA;
+    --red-mid: #E05C4B;
+    --gold: #BA8C2A;
+    --gold-light: #FBF3E0;
+    --text: #1C1412;
+    --text-muted: #6B5F5C;
+    --text-hint: #A89E9B;
+    --bg: #FAF8F7;
+    --card: #FFFFFF;
+    --border: rgba(0,0,0,0.07);
+    --border-strong: rgba(0,0,0,0.13);
+    --radius: 14px;
+    --radius-sm: 8px;
+    --shadow: 0 2px 20px rgba(192,57,43,0.08);
+    --shadow-lg: 0 8px 40px rgba(192,57,43,0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250,248,247,0.93); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem; height: 66px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700;
+    color: var(--red); display: flex; align-items: center; gap: 10px;
+  }
+  .nav-logo-icon {
+    width: 34px; height: 34px; background: var(--red);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .nav-links { display: flex; gap: 1.75rem; align-items: center; }
+  .nav-links a { text-decoration: none; font-size: 14px; font-weight: 400; color: var(--text-muted); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--red); }
+  .nav-cta {
+    background: var(--red) !important; color: white !important;
+    font-weight: 500 !important; padding: 9px 22px !important;
+    border-radius: 50px; transition: background 0.2s, transform 0.15s !important;
+  }
+  .nav-cta:hover { background: var(--red-dark) !important; transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero-wrap { background: var(--text); position: relative; overflow: hidden; }
+  .hero-accent {
+    position: absolute; top: -120px; right: -120px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,57,43,0.35) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-accent2 {
+    position: absolute; bottom: -80px; left: -80px;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,57,43,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero {
+    max-width: 1000px; margin: 0 auto;
+    padding: 7rem 2rem 6rem;
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(192,57,43,0.25); color: #F5A89A;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 50px; margin-bottom: 1.5rem;
+    border: 1px solid rgba(192,57,43,0.35);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(34px, 5.5vw, 58px); font-weight: 700; line-height: 1.08;
+    color: white; margin-bottom: 1.25rem;
+  }
+  .hero h1 em { color: var(--red-mid); font-style: italic; }
+  .hero p { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.6); margin-bottom: 2.5rem; max-width: 440px; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--red); color: white;
+    padding: 14px 30px; border-radius: 50px;
+    font-size: 15px; font-weight: 500; text-decoration: none; border: none;
+    cursor: pointer; transition: all 0.2s; display: inline-block; font-family: 'DM Sans', sans-serif;
+  }
+  .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(192,57,43,0.4); }
+  .btn-outline {
+    background: transparent; color: rgba(255,255,255,0.75);
+    padding: 14px 30px; border-radius: 50px; font-size: 15px; font-weight: 500;
+    text-decoration: none; border: 1px solid rgba(255,255,255,0.25);
+    cursor: pointer; transition: all 0.2s; display: inline-block;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.08); color: white; }
+  .hero-stats-panel {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius); padding: 1.75rem 1.5rem;
+    display: flex; flex-direction: column; gap: 1.25rem;
+    min-width: 180px;
+  }
+  .hstat-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: white; }
+  .hstat-label { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 1px; }
+
+  /* ── RATE BANNER ── */
+  .rate-banner {
+    background: var(--red-light); border-bottom: 1px solid rgba(192,57,43,0.12);
+    padding: 1.25rem 2rem;
+  }
+  .rate-banner-inner {
+    max-width: 1000px; margin: 0 auto;
+    display: flex; gap: 2rem; flex-wrap: wrap; align-items: center; justify-content: center;
+  }
+  .rate-item { text-align: center; }
+  .rate-type { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--red); font-weight: 500; margin-bottom: 4px; }
+  .rate-prices { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .rate-pill {
+    background: white; border: 1px solid rgba(192,57,43,0.2);
+    border-radius: 50px; padding: 3px 12px;
+    font-size: 13px; color: var(--text-muted);
+  }
+  .rate-pill strong { color: var(--red); font-weight: 500; }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 2rem; max-width: 1000px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--red); margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 4vw, 36px); font-weight: 700; color: var(--text);
+    line-height: 1.2; margin-bottom: 0.75rem;
+  }
+  .section-sub { font-size: 16px; color: var(--text-muted); font-weight: 300; max-width: 480px; }
+
+  /* ── COACHES ── */
+  .coaches-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
+  .coach-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.5rem; text-align: center;
+    transition: all 0.2s;
+  }
+  .coach-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+  .coach-avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--red-light); margin: 0 auto 1rem;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--red);
+    border: 2px solid rgba(192,57,43,0.15);
+  }
+  .coach-name { font-size: 16px; font-weight: 500; margin-bottom: 4px; }
+  .coach-role { font-size: 12px; color: var(--text-hint); }
+  .coach-badge-row { margin-top: 10px; }
+  .cbadge {
+    display: inline-block; background: var(--red-light); color: var(--red);
+    font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px;
+  }
+
+  /* ── LESSONS ── */
+  .lessons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+  .lesson-card {
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: var(--radius); padding: 1.75rem;
+    cursor: pointer; transition: all 0.2s; position: relative;
+  }
+  .lesson-card:hover { border-color: rgba(192,57,43,0.4); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .lesson-card.selected { border-color: var(--red); border-width: 2px; background: var(--red-light); }
+  .lesson-card.featured::before {
+    content: 'Most popular';
+    position: absolute; top: -11px; left: 1.25rem;
+    background: var(--red); color: white;
+    font-size: 11px; font-weight: 500; padding: 3px 12px; border-radius: 20px;
+  }
+  .lesson-icon { font-size: 26px; margin-bottom: 1rem; }
+  .lesson-name { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .lesson-desc { font-size: 13px; color: var(--text-muted); font-weight: 300; margin-bottom: 0.75rem; }
+  .lesson-details { font-size: 12px; color: var(--text-hint); margin-bottom: 1rem; }
+  .lesson-price { font-size: 24px; font-weight: 500; color: var(--red); }
+  .lesson-price small { font-size: 13px; color: var(--text-muted); font-weight: 300; }
+  .price-breakdown { font-size: 11px; color: var(--text-hint); margin-top: 4px; }
+
+  /* ── BOOKING ── */
+  .booking-wrapper {
+    background: white; border-radius: 20px;
+    box-shadow: var(--shadow-lg); padding: 2.5rem; margin-top: 2.5rem;
+    border: 1px solid rgba(192,57,43,0.08);
+  }
+  .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .col-title {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--text-hint); margin-bottom: 1rem;
+  }
+  /* Calendar */
+  .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .cal-month-label { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; }
+  .cal-nav {
+    background: none; border: 1px solid var(--border-strong);
+    border-radius: 6px; padding: 5px 11px; cursor: pointer;
+    font-size: 13px; color: var(--text-muted); transition: all 0.15s;
+  }
+  .cal-nav:hover { background: var(--red-light); border-color: var(--red); color: var(--red); }
+  .weekday-row { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; margin-bottom: 4px; }
+  .wday { text-align: center; font-size: 11px; color: var(--text-hint); font-weight: 500; padding: 4px 0; }
+  .days-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; }
+  .day-btn {
+    aspect-ratio: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    border-radius: 7px; cursor: pointer; border: none; background: transparent;
+    font-size: 13px; color: var(--text); transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .day-btn:hover:not(.off):not(.empty) { background: var(--red-light); color: var(--red); }
+  .day-btn.selected { background: var(--red) !important; color: white !important; font-weight: 500; }
+  .day-btn.off { color: var(--text-hint); cursor: not-allowed; }
+  .day-btn.empty { cursor: default; }
+  .day-btn.today { font-weight: 500; }
+  .avail-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--red); margin-top: 2px; opacity: 0.5; }
+  /* Slots */
+  .slots-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .slot-btn {
+    padding: 10px 8px; text-align: center;
+    border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+    cursor: pointer; background: var(--card);
+    font-size: 13px; color: var(--text); transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .slot-btn:hover:not(.booked) { border-color: var(--red-mid); background: var(--red-light); }
+  .slot-btn.selected { background: var(--red); border-color: var(--red); color: white; font-weight: 500; }
+  .slot-btn.booked { background: var(--bg); color: var(--text-hint); cursor: not-allowed; font-size: 12px; }
+  .slot-tag { font-size: 10px; display: block; margin-top: 2px; opacity: 0.65; }
+
+  /* Form */
+  .form-section { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .fg { display: flex; flex-direction: column; gap: 5px; }
+  .fg.full { grid-column: 1 / -1; }
+  .fg label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-hint); }
+  .fg input, .fg select, .fg textarea {
+    padding: 11px 13px;
+    border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+    font-size: 14px; font-family: 'DM Sans', sans-serif;
+    color: var(--text); background: var(--card); outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .fg input:focus, .fg select:focus, .fg textarea:focus {
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(192,57,43,0.1);
+  }
+  .fg textarea { resize: none; height: 80px; }
+
+  /* Summary */
+  .summary-box {
+    margin-top: 2rem;
+    background: var(--red-light); border-radius: var(--radius);
+    padding: 1.5rem; border: 1px solid rgba(192,57,43,0.12);
+  }
+  .sum-title { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--red); margin-bottom: 1rem; }
+  .sum-row { display: flex; justify-content: space-between; font-size: 14px; padding: 5px 0; color: var(--text-muted); }
+  .sum-row strong { color: var(--text); font-weight: 500; }
+  .sum-total {
+    display: flex; justify-content: space-between;
+    padding-top: 12px; margin-top: 8px;
+    border-top: 1px solid rgba(192,57,43,0.18);
+    font-size: 20px; font-weight: 500; color: var(--red);
+  }
+  .submit-btn {
+    width: 100%; margin-top: 1.25rem;
+    background: var(--red); color: white; padding: 16px;
+    border: none; border-radius: 50px; font-size: 16px; font-weight: 500;
+    font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s;
+  }
+  .submit-btn:hover { background: var(--red-dark); transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+  .submit-note { text-align: center; font-size: 12px; color: var(--text-hint); margin-top: 8px; }
+
+  /* Reviews */
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+  .review-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+  .review-stars { color: var(--gold); font-size: 14px; margin-bottom: 0.75rem; }
+  .review-text { font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.7; margin-bottom: 1rem; font-style: italic; }
+  .review-author { font-size: 13px; font-weight: 500; }
+  .review-detail { font-size: 12px; color: var(--text-hint); }
+
+  /* FAQ */
+  .faq-list { margin-top: 2rem; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q {
+    width: 100%; text-align: left; padding: 1.2rem 0;
+    background: none; border: none; cursor: pointer;
+    font-size: 15px; font-weight: 500; color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: color 0.15s;
+  }
+  .faq-q:hover { color: var(--red); }
+  .faq-arrow { color: var(--text-hint); font-size: 18px; transition: transform 0.2s; flex-shrink: 0; }
+  .faq-a { font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.7; padding-bottom: 1.2rem; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+  /* Footer */
+  footer { background: var(--text); padding: 3.5rem 2rem; text-align: center; margin-top: 4rem; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: white; margin-bottom: 0.4rem; }
+  .footer-logo span { color: var(--red-mid); }
+  .footer-sub { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 1.75rem; }
+  .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+  .footer-links a:hover { color: white; }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.2); }
+
+  /* Modal */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.55); backdrop-filter: blur(5px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: white; border-radius: 20px; padding: 3rem;
+    max-width: 440px; width: 90%; text-align: center;
+    animation: pop 0.3s ease;
+  }
+  @keyframes pop { from { transform: scale(0.88); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .modal-icon { font-size: 52px; margin-bottom: 1rem; }
+  .modal-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; margin-bottom: 0.75rem; }
+  .modal-text { font-size: 15px; color: var(--text-muted); font-weight: 300; line-height: 1.7; margin-bottom: 2rem; }
+  .modal-close { background: var(--red); color: white; padding: 12px 36px; border-radius: 50px; border: none; font-size: 15px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+  .modal-close:hover { background: var(--red-dark); }
+
+  /* Divider */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-stats-panel { flex-direction: row; justify-content: space-around; flex-wrap: wrap; gap: 1rem; }
+    .booking-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .rate-banner-inner { gap: 1.25rem; }
+    nav { padding: 0 1rem; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    section { padding: 3.5rem 1.25rem; }
+    .coach-photo-card { grid-template-columns: 1fr !important; }
+    .action-photos { grid-template-columns: 1fr !important; }
+    .photo-strip { grid-template-columns: repeat(2,1fr) !important; height: 150px !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">🤸</div>
+    Girls Inc. Gymnastics
+  </div>
+  <div class="nav-links">
+    <a href="#about">Coaches</a>
+    <a href="#lessons">Rates</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#booking" class="nav-cta">Book a lesson</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero-wrap" style="position:relative;">
+  <div class="hero-accent"></div>
+  <div class="hero-accent2"></div>
+  <div class="hero" id="home">
+    <div>
+      <div class="hero-badge">📍 Private lessons with Coach Grace · All ages &amp; levels</div>
+      <h1>Where girls grow through <em>gymnastics</em></h1>
+      <p>Personal one-on-one coaching from Coach Grace — tailored to your gymnast from first cartwheel to the competition floor.</p>
+      <div class="hero-btns">
+        <a href="#booking" class="btn-primary">Book a lesson</a>
+        <a href="#lessons" class="btn-outline">See rates</a>
+      </div>
+    </div>
+    <div class="hero-stats-panel">
+      <div>
+        <div class="hstat-num">Coach Grace</div>
+        <div class="hstat-label">Your personal coach</div>
+      </div>
+      <div>
+        <div class="hstat-num">1-on-1</div>
+        <div class="hstat-label">Every session</div>
+      </div>
+      <div>
+        <div class="hstat-num">All ages</div>
+        <div class="hstat-label">Welcome</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RATE BANNER -->
+<div class="rate-banner">
+  <div class="rate-banner-inner">
+    <div class="rate-item">
+      <div class="rate-type">One-on-one</div>
+      <div class="rate-prices">
+        <div class="rate-pill">1 hour · <strong>$60</strong></div>
+        <div class="rate-pill">1.5 hours · <strong>$90</strong></div>
+        <div class="rate-pill">2 hours · <strong>$120</strong></div>
+      </div>
+    </div>
+    <div style="width:1px; background: rgba(192,57,43,0.2); height:40px;"></div>
+    <div class="rate-item">
+      <div class="rate-type">Group (2–3 kids)</div>
+      <div class="rate-prices">
+        <div class="rate-pill">1 hour · <strong>$40/child</strong></div>
+        <div class="rate-pill">1.5 hours · <strong>$60/child</strong></div>
+        <div class="rate-pill">2 hours · <strong>$80/child</strong></div>
+      </div>
+    </div>
+    <div style="width:1px; background: rgba(192,57,43,0.2); height:40px;"></div>
+    <div class="rate-item">
+      <div class="rate-type">Special needs rate</div>
+      <div class="rate-prices">
+        <div class="rate-pill">30 min · <strong>$22.50</strong></div>
+        <div class="rate-pill">45 min · <strong>$33.75</strong></div>
+        <div class="rate-pill">1 hour · <strong>$45</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COACH -->
+<section id="about">
+  <div class="section-eyebrow">Your coach</div>
+  <div class="section-title">Meet Coach Grace</div>
+  <div class="section-sub">All private lessons are taught personally by Coach Grace — one-on-one, every time.</div>
+  <div class="coach-photo-card" style="margin-top:2.5rem; background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); display:grid; grid-template-columns:320px 1fr;">
+    <div style="position:relative;min-height:340px;overflow:hidden;background:var(--red-light);display:flex;align-items:center;justify-content:center;">
+      <div style="text-align:center;">
+        <div style="width:100px;height:100px;border-radius:50%;background:rgba(192,57,43,0.15);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:var(--red);margin:0 auto 12px;">G</div>
+        <div style="font-size:12px;color:var(--red);font-weight:500;opacity:0.7;">Photo coming soon</div>
+      </div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:1rem 1.25rem;">
+        <div style="background:var(--red);color:white;font-size:11px;font-weight:500;padding:3px 12px;border-radius:20px;display:inline-block;">USAG Certified</div>
+      </div>
+    </div>
+    <div style="padding:2.5rem;">
+      <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin-bottom:4px;">Coach Grace</div>
+      <div style="font-size:14px;color:var(--text-hint);margin-bottom:14px;">Private Lessons Coach · Girls Inc. Gymnastics</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.25rem;">
+        <span class="cbadge">Tumbling</span>
+        <span class="cbadge">Beam</span>
+        <span class="cbadge">Bars</span>
+        <span class="cbadge">Floor</span>
+        <span class="cbadge">All ages</span>
+        <span class="cbadge">All levels</span>
+      </div>
+      <div style="font-size:15px;color:var(--text-muted);font-weight:300;line-height:1.8;">
+        I offer one-on-one private lessons tailored to each gymnast's individual goals — whether your child is just starting out or training for competition. Every session is just you and me, so we can focus entirely on what your gymnast needs most.
+      </div>
+      <div style="color:var(--gold);font-size:14px;margin-top:1rem;">★★★★★ <span style="color:var(--text-hint);font-size:13px;">Highly rated by local families</span></div>
+      <a href="#booking" class="btn-primary" style="display:inline-block;margin-top:1.5rem;font-size:14px;padding:11px 24px;">Book with Coach Grace</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- LESSON TYPES -->
+<section id="lessons">
+  <div class="section-eyebrow">Lesson options</div>
+  <div class="section-title">Pick your session type</div>
+  <div class="section-sub">All sessions logged same-day. Group privates list each child.</div>
+  <div class="lessons-grid">
+    <div class="lesson-card featured selected" onclick="selectLesson(this,'Standard Private · 1 hour',60,60)">
+      <div class="lesson-icon">🏅</div>
+      <div class="lesson-name">Standard Private</div>
+      <div class="lesson-desc">The most popular choice — a full hour of dedicated one-on-one coaching to really develop skills.</div>
+      <div class="lesson-details">60 min · Private · All levels</div>
+      <div class="lesson-price">$60 <small>/ session</small></div>
+    </div>
+    <div class="lesson-card" onclick="selectLesson(this,'Extended Private · 1.5 hours',90,90)">
+      <div class="lesson-icon">🤸</div>
+      <div class="lesson-name">Extended Private</div>
+      <div class="lesson-desc">More time to dig deep — great for athletes working on multiple skills or events.</div>
+      <div class="lesson-details">90 min · Private · All levels</div>
+      <div class="lesson-price">$90 <small>/ session</small></div>
+    </div>
+    <div class="lesson-card" onclick="selectLesson(this,'Full Training · 2 hours',120,120)">
+      <div class="lesson-icon">🏆</div>
+      <div class="lesson-name">Full Training</div>
+      <div class="lesson-desc">Maximum training time — ideal for competition prep or a complete multi-event session.</div>
+      <div class="lesson-details">2 hours · Private · Intermediate–Advanced</div>
+      <div class="lesson-price">$120 <small>/ session</small></div>
+    </div>
+    <div class="lesson-card" onclick="selectLesson(this,'Group Private · 1 hour',60,40)">
+      <div class="lesson-icon">👯</div>
+      <div class="lesson-name">Group Private</div>
+      <div class="lesson-desc">Bring 2–3 friends or siblings and split the cost. Same dedicated coaching, shared fun.</div>
+      <div class="lesson-details">1 hour · 2–3 kids · Per child</div>
+      <div class="lesson-price">$40 <small>/ child</small></div>
+      <div class="price-breakdown">1.5 hr $60/child · 2 hr $80/child</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="booking">
+  <div class="section-eyebrow">Reserve your spot</div>
+  <div class="section-title">Book a private lesson</div>
+  <div class="section-sub">Pick a day and time directly on Coach Grace's real calendar — instantly confirmed.</div>
+
+  <!-- Coach confirmation strip -->
+  <div style="margin-top:2rem;margin-bottom:1.5rem;background:white;border:1px solid rgba(192,57,43,0.1);border-radius:var(--radius);padding:1.25rem 1.5rem;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);">
+    <div style="width:44px;height:44px;border-radius:50%;background:var(--red-light);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--red);flex-shrink:0;border:2px solid rgba(192,57,43,0.15);">G</div>
+    <div style="flex:1;">
+      <div style="font-size:14px;font-weight:500;">Booking with Coach Grace</div>
+      <div style="font-size:12px;color:var(--text-hint);margin-top:2px;">All privates are one-on-one with Coach Grace. Select a time that works for you below.</div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <span class="cbadge">1 hr · $60</span>
+      <span class="cbadge">1.5 hrs · $90</span>
+      <span class="cbadge">2 hrs · $120</span>
+    </div>
+  </div>
+
+  <!-- Calendly embed -->
+  <div style="background:white;border-radius:20px;box-shadow:var(--shadow-lg);overflow:hidden;border:1px solid rgba(192,57,43,0.08);">
+    <div class="calendly-inline-widget" data-url="https://calendly.com/nickperk012/30min" style="min-width:320px;height:700px;"></div>
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  </div>
+
+  <p style="text-align:center;font-size:12px;color:var(--text-hint);margin-top:10px;">You'll receive a confirmation email from Calendly right away. Payment details will follow from Coach Grace.</p>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="section-eyebrow">What families say</div>
+  <div class="section-title">Reviews</div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"My daughter has been doing privates with Coach Grace and the improvement has been amazing. She went from struggling with her back walkover to nailing it every time in just a couple months."</div>
+      <div class="review-author">Sarah M.</div>
+      <div class="review-detail">Parent · Weekly sessions with Grace</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"We do group privates with another family — best decision ever. The girls push each other and the coaches make it so fun and productive. Totally worth it."</div>
+      <div class="review-author">The Williams Family</div>
+      <div class="review-detail">Group private sessions</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Coach Sophie is incredible with my shy daughter. She takes her time, explains everything clearly, and my daughter actually asks to go to practice now. That says everything."</div>
+      <div class="review-author">Tina R.</div>
+      <div class="review-detail">Parent · Private sessions with Sophie</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-eyebrow">FAQ</div>
+  <div class="section-title">Common questions</div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How do I know which session length to pick? <span class="faq-arrow">↓</span></button>
+      <div class="faq-a">For beginners or younger kids (under 6), 30 minutes is usually a great starting point. 45 minutes is the sweet spot for most gymnasts — enough time to warm up and really dig into skills. The full hour is best for older athletes or competition-level training.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Can I request a specific coach? <span class="faq-arrow">↓</span></button>
+      <div class="faq-a">Yes! You can indicate a coach preference when booking. We'll do our best to match you. Availability varies, and your booking will be confirmed once the coach reviews the request.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What is the group private rate? <span class="faq-arrow">↓</span></button>
+      <div class="faq-a">Group privates are for 2–3 kids together. Each child pays per-child: $20 for 30 min, $30 for 45 min, or $40 for 1 hour. Make sure all children are listed when submitting the booking request.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What should my child wear? <span class="faq-arrow">↓</span></button>
+      <div class="faq-a">A leotard is ideal. Form-fitting athletic wear (leggings + tucked-in top) also works well. Bare feet or gymnastics shoes — no regular socks on the equipment floor.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">When are privates available? <span class="faq-arrow">↓</span></button>
+      <div class="faq-a">Availability varies by coach and week. Use the booking calendar to see open slots. Privates are typically available Monday through Friday with limited weekend slots available by request.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What's the cancellation policy? <span class="faq-arrow">↓</span></button>
+      <div class="faq-a">Please cancel or reschedule at least 24 hours in advance. Late cancellations may be subject to a partial fee. Life happens — just reach out as early as possible and we'll work with you.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Girls Inc. <span>Gymnastics</span></div>
+  <div class="footer-sub">Private lessons · All ages &amp; levels · Your local gymnastics home</div>
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#about">Coaches</a>
+    <a href="#lessons">Rates</a>
+    <a href="#booking">Book</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <div class="footer-copy">© 2026 Girls Inc. Gymnastics · All rights reserved</div>
+</footer>
+
+
+
+<style>
+.coach-pref-btn {
+  padding: 8px 18px; border-radius: 50px;
+  border: 1px solid var(--border-strong);
+  background: var(--card); font-size: 13px; font-weight: 400;
+  color: var(--text-muted); cursor: pointer; transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif;
+}
+.coach-pref-btn:hover { border-color: var(--red); color: var(--red); }
+.coach-pref-btn.selected { background: var(--red); border-color: var(--red); color: white; font-weight: 500; }
+</style>
+
+<script>
+  function selectLesson(el, name, dur, price) {
+    document.querySelectorAll('.lesson-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function toggleFaq(btn) { btn.parentElement.classList.toggle('open'); }
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
